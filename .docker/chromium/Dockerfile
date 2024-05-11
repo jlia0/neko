@@ -1,5 +1,6 @@
-ARG BASE_IMAGE=m1k1o/neko:base
-FROM $BASE_IMAGE
+# Stage 1: Setup our base
+ARG BASE_IMAGE=newsoftware/neko:base
+FROM $BASE_IMAGE as base
 
 #
 # install neko chromium
@@ -25,9 +26,16 @@ RUN set -eux; \
     apt-get clean -y; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-#
-# copy configuation files
+# Stage 2: Final image
+FROM base AS final
+
 COPY supervisord.conf /etc/neko/supervisord/chromium.conf
 COPY --chown=neko preferences.json /home/neko/.config/chromium/Default/Preferences
 COPY policies.json /etc/chromium/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
+
+# COPY --from=nginx-setup /etc/nginx /etc/nginx
+RUN apt-get update && apt-get install -y nginx
+
+# RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/

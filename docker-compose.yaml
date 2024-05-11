@@ -6,7 +6,7 @@ services:
     shm_size: "2gb"
     ports:
       - "8080:8080"
-      - "9222:9222"
+      - "9222:8001"
       - "52000-52100:52000-52100/udp"
     cap_add:
       - SYS_ADMIN
@@ -16,4 +16,4 @@ services:
       NEKO_PASSWORD_ADMIN: admin
       NEKO_EPR: 52000-52100
       NEKO_ICELITE: 1
-      NEKO_NAT1TO1: <your_ip>
+      NEKO_NAT1TO1: 10.0.0.164
