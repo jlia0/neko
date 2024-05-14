@@ -1,6 +1,6 @@
 # Stage 1: Setup our base
-ARG BASE_IMAGE=newsoftware/neko:base
-FROM $BASE_IMAGE as base
+ARG BASE_IMAGE=newsoftwarehq/neko:base
+FROM --platform=linux/amd64 $BASE_IMAGE as base
 
 #
 # install neko chromium
@@ -27,7 +27,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Stage 2: Final image
-FROM base AS final
+FROM --platform=linux/amd64 base AS final
 
 COPY supervisord.conf /etc/neko/supervisord/chromium.conf
 COPY --chown=neko preferences.json /home/neko/.config/chromium/Default/Preferences

@@ -1,7 +1,7 @@
 #
 # STAGE 1: SERVER
 #
-FROM golang:1.20-bullseye as server
+FROM --platform=linux/amd64 golang:1.20-bullseye as server
 WORKDIR /src
 
 #
@@ -32,7 +32,7 @@ RUN ./build
 #
 # STAGE 2: CLIENT
 #
-FROM node:18-bullseye-slim as client
+FROM --platform=linux/amd64 node:18-bullseye-slim as client
 WORKDIR /src
 
 #
@@ -48,7 +48,7 @@ RUN npm run build
 #
 # STAGE 3: RUNTIME
 #
-FROM debian:bullseye-slim
+FROM --platform=linux/amd64 debian:bullseye-slim
 
 #
 # avoid warnings by switching to noninteractive
