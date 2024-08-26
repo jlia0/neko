@@ -2,7 +2,7 @@
 ARG BASE_IMAGE=newsoftwarehq/neko:base
 FROM --platform=linux/amd64 $BASE_IMAGE as base
 
-#
+# --platform=linux/amd64
 # install neko chromium
 RUN set -eux; \
     echo "deb http://ftp.de.debian.org/debian bookworm main" >> /etc/apt/sources.list; \

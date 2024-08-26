@@ -7,13 +7,16 @@ services:
     ports:
       - "8080:8080"
       - "8888:8001"
-      - "52000-52100:52000-52100/udp"
+      - "8081:8081/tcp"
+      - "8082:8082/udp"
     cap_add:
       - SYS_ADMIN
     environment:
       NEKO_SCREEN: '1920x1080@30'
       NEKO_PASSWORD: neko
       NEKO_PASSWORD_ADMIN: admin
-      NEKO_EPR: 52000-52100
+      NEKO_TCPMUX: 8081
+      NEKO_UDPMUX: 8082
       NEKO_ICELITE: 1
-      NEKO_NAT1TO1: 10.0.0.164
+      # NEKO_NAT1TO1: 10.0.0.164
+      NEKO_NAT1TO1: 192.168.12.252

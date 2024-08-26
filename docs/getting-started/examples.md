@@ -91,7 +91,7 @@ services:
       # note: when setting NEKO_VIDEO, then variables NEKO_MAX_FPS and NEKO_VIDEO_BITRATE
       #       are not being used, you can adjust them in this variable.
       NEKO_VIDEO: |
-        ximagesrc display-name=%s use-damage=0 show-pointer=true use-damage=false
+        ximagesrc display-name=%s use-damage=0 show-pointer=false use-damage=false
           ! video/x-raw,framerate=30/1
           ! videoconvert
           ! queue

@@ -25,12 +25,12 @@ import (
 
     gst-inspect-1.0 --version
     gst-inspect-1.0 plugin
-    gst-launch-1.0 ximagesrc show-pointer=true use-damage=false ! video/x-raw,framerate=30/1 ! videoconvert ! queue ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 ! autovideosink
+    gst-launch-1.0 ximagesrc show-pointer=false use-damage=false ! video/x-raw,framerate=30/1 ! videoconvert ! queue ! vp8enc error-resilient=partitions keyframe-max-dist=10 auto-alt-ref=true cpu-used=5 deadline=1 ! autovideosink
     gst-launch-1.0 pulsesrc ! audioconvert ! opusenc ! autoaudiosink
 */
 
 const (
-	videoSrc = "ximagesrc display-name=%s show-pointer=true use-damage=false ! video/x-raw,framerate=%d/1 ! videoconvert ! queue ! "
+	videoSrc = "ximagesrc display-name=%s show-pointer=false use-damage=false ! video/x-raw,framerate=%d/1 ! videoconvert ! queue ! "
 	audioSrc = "pulsesrc device=%s ! audio/x-raw,channels=2 ! audioconvert ! "
 )
 
