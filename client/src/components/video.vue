@@ -34,7 +34,7 @@
         </div>
         <div ref="aspect" class="player-aspect" />
       </div>
-      <ul v-if="!fullscreen && !hideControls" class="video-menu top">
+      <!-- <ul v-if="!fullscreen && !hideControls" class="video-menu top">
         <li><i @click.stop.prevent="requestFullscreen" class="fas fa-expand"></i></li>
         <li v-if="admin"><i @click.stop.prevent="openResolution" class="fas fa-desktop"></i></li>
         <li v-if="!controlLocked && !implicitHosting" :class="extraControls || 'extra-control'">
@@ -56,7 +56,7 @@
             class="fas fa-external-link-alt"
           />
         </li>
-      </ul>
+      </ul> -->
       <neko-resolution ref="resolution" v-if="admin" />
       <neko-clipboard ref="clipboard" v-if="hosting && (!clipboard_read_available || !clipboard_write_available)" />
     </div>
@@ -448,11 +448,14 @@
 
       this._video.addEventListener('canplaythrough', () => {
         this.$accessor.video.setPlayable(true)
-        if (this.autoplay) {
-          this.$nextTick(() => {
-            this.$accessor.video.play()
-          })
-        }
+        this.$nextTick(() => {
+          this.$accessor.video.play()
+        })
+        // if (this.autoplay) {
+        //   this.$nextTick(() => {
+        //     this.$accessor.video.play()
+        //   })
+        // }
       })
 
       this._video.addEventListener('ended', () => {
@@ -494,6 +497,10 @@
         this.$client.sendData('keyup', { key: this.keyMap(key) })
       }
       this.keyboard.listenTo(this._overlay)
+
+      setTimeout(() => {
+        this.toggleControl()
+      }, 2000)
     }
 
     beforeDestroy() {

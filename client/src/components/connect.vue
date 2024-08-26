@@ -1,24 +1,14 @@
 <template>
   <div class="connect">
-    <div class="window">
-      <div class="logo" title="About n.eko" @click.stop.prevent="about">
-        <img src="@/assets/images/logo.svg" alt="n.eko" />
-        <span><b>n</b>.eko</span>
+    <!-- <div class="window">
+      <div class="logo" title="About New Software">
+        <img src="@/assets/images/logo_newsoftware.svg" alt="new software" style="height: 40px" />
       </div>
-      <form class="message" v-if="!connecting" @submit.stop.prevent="connect">
-        <span v-if="!autoPassword">{{ $t('connect.login_title') }}</span>
-        <span v-else>{{ $t('connect.invitation_title') }}</span>
-        <input type="text" :placeholder="$t('connect.displayname')" v-model="displayname" />
-        <input type="password" :placeholder="$t('connect.password')" v-model="password" v-if="!autoPassword" />
-        <button type="submit" @click.stop.prevent="login">
-          {{ $t('connect.connect') }}
-        </button>
-      </form>
       <div class="loader" v-if="connecting">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -36,9 +26,9 @@
     align-items: center;
 
     .window {
-      width: 300px;
-      background: $background-secondary;
-      border-radius: 5px;
+      width: 400px;
+      background: white;
+      border-radius: 10px;
       padding: 10px;
 
       .logo {
@@ -151,10 +141,10 @@
 
   @Component({ name: 'neko-connect' })
   export default class extends Vue {
-    private autoPassword: string | null = new URL(location.href).searchParams.get('pwd')
+    private autoPassword: string | null = 'nwswpass'
 
-    private displayname: string = ''
-    private password: string = ''
+    private displayname: string = 'user'
+    private password: string = 'nwswpass'
 
     mounted() {
       // auto-password fill
@@ -166,7 +156,7 @@
 
       // auto-user fill
       let displayname = this.$accessor.displayname
-      const usr = new URL(location.href).searchParams.get('usr')
+      const usr = 'user'
       if (usr) {
         this.removeUrlParam('usr')
         displayname = this.$accessor.displayname || usr
