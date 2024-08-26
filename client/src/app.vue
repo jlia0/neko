@@ -179,7 +179,7 @@
     }
 
     get isEmbedMode() {
-      return false
+      return true
     }
 
     get hideControls() {
