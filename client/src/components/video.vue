@@ -287,7 +287,7 @@
     }
 
     get autoplay() {
-      return this.$accessor.settings.autoplay
+      return true
     }
 
     // server-side lock
@@ -448,14 +448,13 @@
 
       this._video.addEventListener('canplaythrough', () => {
         this.$accessor.video.setPlayable(true)
-        this.$nextTick(() => {
-          this.$accessor.video.play()
-        })
-        // if (this.autoplay) {
-        //   this.$nextTick(() => {
-        //     this.$accessor.video.play()
-        //   })
-        // }
+        if (this.autoplay) {
+          this.$nextTick(() => {
+            this.$accessor.video.play()
+            this.$accessor.video.setMuted(false)
+            this.toggleControl()
+          })
+        }
       })
 
       this._video.addEventListener('ended', () => {
@@ -497,10 +496,6 @@
         this.$client.sendData('keyup', { key: this.keyMap(key) })
       }
       this.keyboard.listenTo(this._overlay)
-
-      setTimeout(() => {
-        this.toggleControl()
-      }, 2000)
     }
 
     beforeDestroy() {
